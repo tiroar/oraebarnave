@@ -1,4 +1,38 @@
 import { Medication } from '../data/medications';
+import { getCustomMedications, CustomMedication } from '../db/database';
+
+/**
+ * Converts a custom medication from DB to the Medication interface
+ */
+function convertCustomMedication(custom: CustomMedication): Medication {
+  return {
+    id: `custom-${custom.id}`,
+    name: custom.name,
+    dose: custom.dose,
+    time: custom.time,
+    timing: custom.timing,
+    instructions: custom.instructions,
+    warning: custom.warning,
+    color: custom.color,
+    requiresConfirmation: true,
+    category: 'morning' as const,
+    icon: custom.icon,
+    frequency: custom.frequency,
+    startDate: custom.startDate,
+    monthlyDay: custom.monthlyDay
+  };
+}
+
+/**
+ * Gets all active medications (built-in + custom from DB)
+ */
+export async function getAllActiveMedications(): Promise<Medication[]> {
+  const customMeds = await getCustomMedications();
+  const convertedCustomMeds = customMeds.map(convertCustomMedication);
+  
+  // Return all custom medications (built-in array is empty by design)
+  return convertedCustomMeds;
+}
 
 /**
  * Checks if a medication should be shown today based on:

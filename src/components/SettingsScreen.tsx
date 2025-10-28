@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { exportAllData, importData } from '../utils/exportData';
 import { getSettings, updateSettings, getCustomMedications, addCustomMedication, deleteCustomMedication, CustomMedication } from '../db/database';
 
-type SettingsTab = 'medications' | 'refill' | 'notifications' | 'display' | 'backup';
+type SettingsTab = 'medications' | 'notifications' | 'display' | 'backup';
 
 export function SettingsScreen() {
   const [activeTab, setActiveTab] = useState<SettingsTab>('medications');
@@ -32,13 +32,6 @@ export function SettingsScreen() {
             💊 Barna
           </button>
           <button
-            className={activeTab === 'refill' ? 'btn-primary' : 'btn-outline'}
-            onClick={() => setActiveTab('refill')}
-            style={{ fontSize: '1rem', padding: '0.75rem 1rem', whiteSpace: 'nowrap' }}
-          >
-            📦 Stoku
-          </button>
-          <button
             className={activeTab === 'notifications' ? 'btn-primary' : 'btn-outline'}
             onClick={() => setActiveTab('notifications')}
             style={{ fontSize: '1rem', padding: '0.75rem 1rem', whiteSpace: 'nowrap' }}
@@ -63,7 +56,6 @@ export function SettingsScreen() {
 
         {/* Tab content */}
         {activeTab === 'medications' && <MedicationsTab />}
-        {activeTab === 'refill' && <RefillTab />}
         {activeTab === 'notifications' && <NotificationsTab />}
         {activeTab === 'display' && <DisplayTab />}
         {activeTab === 'backup' && <BackupTab />}
@@ -123,7 +115,9 @@ function MedicationsTab() {
         frequency: 'daily'
       });
       loadCustomMeds();
-      window.location.reload(); // Reload to update notifications
+      
+      // Notify other components about the change
+      window.dispatchEvent(new Event('medicationsUpdated'));
     } catch (error) {
       alert('❌ Gabim gjatë shtimit të medikamentit!');
     }
@@ -135,7 +129,9 @@ function MedicationsTab() {
     if (confirm('A jeni të sigurt që doni të fshini këtë medikament?')) {
       await deleteCustomMedication(id);
       loadCustomMeds();
-      window.location.reload();
+      
+      // Notify other components about the change
+      window.dispatchEvent(new Event('medicationsUpdated'));
     }
   };
 
@@ -390,96 +386,37 @@ function MedicationsTab() {
   );
 }
 
-// Refill/Stock Tracker Tab
-function RefillTab() {
-  const [stockItems] = useState([
-    { name: 'Gliclada 60mg', remaining: 28, dailyUse: 1, daysLeft: 28 },
-    { name: 'Madopar', remaining: 45, dailyUse: 1.5, daysLeft: 30 },
-    { name: 'Pramipexole', remaining: 30, dailyUse: 1, daysLeft: 30 },
-    { name: 'Maymetis', remaining: 56, dailyUse: 2, daysLeft: 28 },
-    { name: 'Jardiance', remaining: 28, dailyUse: 1, daysLeft: 28 },
-    { name: 'Aspirin', remaining: 28, dailyUse: 1, daysLeft: 28 },
-    { name: 'Lyrica', remaining: 28, dailyUse: 1, daysLeft: 28 }
-  ]);
-
-  const getAlertLevel = (daysLeft: number) => {
-    if (daysLeft <= 5) return { color: '#D32F2F', text: '🚨 KRITIK', bg: '#FFEBEE' };
-    if (daysLeft <= 10) return { color: '#F57C00', text: '⚠️ I ULËT', bg: '#FFF3E0' };
-    return { color: '#388E3C', text: '✅ MIRË', bg: '#E8F5E9' };
-  };
-
-  return (
-    <div style={{ marginTop: '1.5rem' }}>
-      <div className="card" style={{ background: '#FFF3E0', borderLeft: '6px solid #F57C00' }}>
-        <h2 style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>
-          📦 Gjendja e Stokut
-        </h2>
-        <p style={{ fontSize: '1rem', color: '#666' }}>
-          Ju njoftojmë kur mbeten vetëm 5 ditë barna.
-        </p>
-      </div>
-
-      {stockItems.map((item, idx) => {
-        const alert = getAlertLevel(item.daysLeft);
-        return (
-          <div
-            key={idx}
-            className="card"
-            style={{
-              marginTop: '1rem',
-              background: alert.bg,
-              borderLeft: `6px solid ${alert.color}`
-            }}
-          >
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem' }}>
-              <div style={{ flex: 1 }}>
-                <div style={{ fontSize: '1.25rem', fontWeight: 700 }}>{item.name}</div>
-                <div style={{ fontSize: '1.1rem', color: '#666', marginTop: '0.25rem' }}>
-                  💊 {item.remaining} copë të mbetura
-                </div>
-              </div>
-              <div style={{
-                fontSize: '1rem',
-                fontWeight: 700,
-                color: alert.color,
-                padding: '0.5rem 0.75rem',
-                background: 'white',
-                borderRadius: '8px'
-              }}>
-                {alert.text}
-              </div>
-            </div>
-            <div style={{
-              fontSize: '1.5rem',
-              fontWeight: 700,
-              color: alert.color,
-              textAlign: 'center',
-              padding: '0.75rem',
-              background: 'white',
-              borderRadius: '8px'
-            }}>
-              {item.daysLeft} ditë të mbetura
-            </div>
-          </div>
-        );
-      })}
-
-      <button
-        className="btn-primary"
-        onClick={() => alert('Veçoria "Shto stokun" do të aktivizohet së shpejti!')}
-        style={{ width: '100%', marginTop: '1.5rem', fontSize: '1.25rem', padding: '1.25rem' }}
-      >
-        ➕ Shto stokun
-      </button>
-    </div>
-  );
-}
-
 // Notifications Settings Tab
 function NotificationsTab() {
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [vibrationEnabled, setVibrationEnabled] = useState(true);
   const [reminderMinutes, setReminderMinutes] = useState(10);
+
+  useEffect(() => {
+    loadNotificationSettings();
+  }, []);
+
+  const loadNotificationSettings = async () => {
+    const settings = await getSettings();
+    if (settings) {
+      setSoundEnabled(settings.soundEnabled);
+      setVibrationEnabled(settings.vibrationEnabled);
+      setReminderMinutes(settings.snoozeMinutes);
+    }
+  };
+
+  const handleSave = async () => {
+    try {
+      await updateSettings({
+        soundEnabled,
+        vibrationEnabled,
+        snoozeMinutes: reminderMinutes
+      });
+      alert('✅ Cilësimet u ruajtën!');
+    } catch (error) {
+      alert('❌ Gabim gjatë ruajtjes!');
+    }
+  };
 
   return (
     <div style={{ marginTop: '1.5rem' }}>
@@ -536,9 +473,7 @@ function NotificationsTab() {
 
         <button
           className="btn-primary"
-          onClick={() => {
-            alert('Cilësimet u ruajtën!');
-          }}
+          onClick={handleSave}
           style={{ width: '100%', marginTop: '1rem', fontSize: '1.25rem', padding: '1.25rem' }}
         >
           💾 Ruaj Ndryshimet

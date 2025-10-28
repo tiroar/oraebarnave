@@ -9,16 +9,27 @@ import { EmergencyScreen } from './components/EmergencyScreen';
 import { SettingsScreen } from './components/SettingsScreen';
 import { DoctorAppointmentsScreen } from './components/DoctorAppointmentsScreen';
 import { HealthDiaryScreen } from './components/HealthDiaryScreen';
+import { PrivacyScreen } from './components/PrivacyScreen';
+import { WelcomeScreen } from './components/WelcomeScreen';
 import { initializeSettings, getSettings } from './db/database';
 import { registerNotifications, scheduleAllNotifications } from './utils/notifications';
 import './styles/global.css';
 
-type Screen = 'home' | 'history' | 'bloodsugar' | 'instructions' | 'medlist' | 'reports' | 'emergency' | 'settings' | 'appointments' | 'diary';
+type Screen = 'home' | 'history' | 'bloodsugar' | 'instructions' | 'medlist' | 'reports' | 'emergency' | 'settings' | 'appointments' | 'diary' | 'privacy';
+
+interface BeforeInstallPromptEvent extends Event {
+  prompt: () => Promise<void>;
+  userChoice: Promise<{ outcome: 'accepted' | 'dismissed' }>;
+}
 
 function App() {
   const [currentScreen, setCurrentScreen] = useState<Screen>('home');
   const [notificationsGranted, setNotificationsGranted] = useState(false);
-  const [installPrompt, setInstallPrompt] = useState<any>(null);
+  const [installPrompt, setInstallPrompt] = useState<BeforeInstallPromptEvent | null>(null);
+  const [showWelcome, setShowWelcome] = useState(() => {
+    // Check if user has completed welcome
+    return localStorage.getItem('welcomeCompleted') !== 'true';
+  });
 
   useEffect(() => {
     // Initialize database
@@ -33,9 +44,9 @@ function App() {
     }
 
     // Listen for install prompt
-    window.addEventListener('beforeinstallprompt', (e) => {
+    window.addEventListener('beforeinstallprompt', (e: Event) => {
       e.preventDefault();
-      setInstallPrompt(e);
+      setInstallPrompt(e as BeforeInstallPromptEvent);
     });
 
     // Schedule notifications on load
@@ -91,6 +102,11 @@ function App() {
     
     setInstallPrompt(null);
   };
+
+  // Show welcome screen on first run
+  if (showWelcome) {
+    return <WelcomeScreen onComplete={() => setShowWelcome(false)} />;
+  }
 
   return (
     <div style={{ minHeight: '100vh', background: '#f5f5f5' }}>
@@ -154,6 +170,7 @@ function App() {
       {currentScreen === 'history' && <HistoryScreen />}
       {currentScreen === 'settings' && <SettingsScreen />}
       {currentScreen === 'instructions' && <InstructionsScreen />}
+      {currentScreen === 'privacy' && <PrivacyScreen />}
 
       {/* Bottom navigation - Dropdown */}
       <div className="bottom-nav">
@@ -181,6 +198,7 @@ function App() {
             <option value="reports">🏥 Raportet Mjekësore</option>
             <option value="appointments">👨‍⚕️ Takimet me Doktorë</option>
             <option value="settings">⚙️ Cilësimet</option>
+            <option value="privacy">🔒 Privatësia</option>
             <option value="emergency" style={{ color: '#D32F2F' }}>🚨 Urgjencë</option>
           </select>
           <div style={{

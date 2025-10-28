@@ -1,7 +1,7 @@
 {
   "name": "Ora e Barnave",
   "short_name": "Ora e Barnave",
-  "description": "Kujtues medikamentesh për Sevdije Zeqiri",
+  "description": "Aplikacion falas për të menaxhuar orarin e barnave tuaja",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",

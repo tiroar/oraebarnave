@@ -11,7 +11,7 @@ export default defineConfig({
       manifest: {
         name: 'Ora e Barnave',
         short_name: 'Ora e Barnave',
-        description: 'Kujtues medikamentesh për Sevdije Zeqiri',
+        description: 'Aplikacion falas për të menaxhuar orarin e barnave tuaja',
         theme_color: '#4CAF50',
         background_color: '#ffffff',
         display: 'standalone',

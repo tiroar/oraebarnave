@@ -1,20 +1,26 @@
 import { useState, useEffect } from 'react';
-import { medications, Medication } from '../data/medications';
+import { Medication } from '../data/medications';
 import { MedicationCard } from './MedicationCard';
 import { MedicationGroupCard } from './MedicationGroupCard';
 import { getTodayLogs } from '../db/database';
 import { formatDateAlbanian, formatTimeAlbanian } from '../utils/dateHelpers';
-import { shouldShowMedicationToday } from '../utils/medicationHelpers';
+import { shouldShowMedicationToday, getAllActiveMedications } from '../utils/medicationHelpers';
 
 export function HomeScreen() {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [takenMeds, setTakenMeds] = useState<Set<string>>(new Set());
   const [activeAlert, setActiveAlert] = useState<string | null>(null);
+  const [medications, setMedications] = useState<Medication[]>([]);
 
   useEffect(() => {
     // Update time every second
     const timer = setInterval(() => setCurrentTime(new Date()), 1000);
     return () => clearInterval(timer);
+  }, []);
+
+  useEffect(() => {
+    // Load medications from database
+    loadMedications();
   }, []);
 
   useEffect(() => {
@@ -29,7 +35,12 @@ export function HomeScreen() {
     checkActiveMedication(); // Check immediately
     
     return () => clearInterval(checker);
-  }, []);
+  }, [medications]);
+
+  const loadMedications = async () => {
+    const meds = await getAllActiveMedications();
+    setMedications(meds);
+  };
 
   const loadTodayLogs = async () => {
     const logs = await getTodayLogs();
@@ -78,7 +89,20 @@ export function HomeScreen() {
       utterance.lang = 'sq-AL';
       window.speechSynthesis.speak(utterance);
     }
+    
+    // Reload today's logs to reflect the change
+    loadTodayLogs();
   };
+
+  // Listen for medication updates
+  useEffect(() => {
+    const handleMedicationsUpdated = () => {
+      loadMedications();
+    };
+    
+    window.addEventListener('medicationsUpdated', handleMedicationsUpdated);
+    return () => window.removeEventListener('medicationsUpdated', handleMedicationsUpdated);
+  }, []);
 
   const handleSnooze = () => {
     setActiveAlert(null);

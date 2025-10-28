@@ -1,5 +1,4 @@
-import { medications } from '../data/medications';
-import { shouldShowMedicationToday } from './medicationHelpers';
+import { shouldShowMedicationToday, getAllActiveMedications } from './medicationHelpers';
 
 export async function registerNotifications(): Promise<boolean> {
   if (!('Notification' in window)) {
@@ -42,6 +41,9 @@ export async function scheduleAllNotifications() {
     // Clear existing notifications
     const existingNotifications = await registration.getNotifications();
     existingNotifications.forEach(notif => notif.close());
+
+    // Get all active medications from database
+    const medications = await getAllActiveMedications();
 
     // Schedule notifications for each medication that should be shown today
     const today = new Date();
@@ -115,24 +117,52 @@ export async function showNotification(med: any) {
 
 function playAlarmSound(type: string) {
   try {
-    const audio = new Audio();
+    // Use Web Audio API to generate a simple beep sound
+    const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+    const oscillator = audioContext.createOscillator();
+    const gainNode = audioContext.createGain();
     
-    // Different alarm tones based on urgency
+    oscillator.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+    
+    // Different frequencies based on urgency
     if (type === 'urgent') {
-      // Loud, attention-grabbing tone
-      audio.src = '/sounds/urgent-alarm.mp3';
+      oscillator.frequency.value = 880; // High pitch
+      gainNode.gain.value = 0.3;
     } else if (type === 'normal') {
-      // Standard notification sound
-      audio.src = '/sounds/normal-alarm.mp3';
+      oscillator.frequency.value = 440; // Middle A
+      gainNode.gain.value = 0.2;
     } else {
-      // Gentle reminder
-      audio.src = '/sounds/gentle-reminder.mp3';
+      oscillator.frequency.value = 262; // Middle C
+      gainNode.gain.value = 0.15;
     }
-
-    audio.volume = 1.0;
-    audio.play().catch(err => console.log('Could not play sound:', err));
+    
+    oscillator.type = 'sine';
+    oscillator.start(audioContext.currentTime);
+    oscillator.stop(audioContext.currentTime + 0.3); // 300ms beep
+    
+    // Repeat beep 3 times for urgent
+    if (type === 'urgent') {
+      setTimeout(() => {
+        const osc2 = audioContext.createOscillator();
+        osc2.connect(gainNode);
+        osc2.frequency.value = 880;
+        osc2.type = 'sine';
+        osc2.start(audioContext.currentTime);
+        osc2.stop(audioContext.currentTime + 0.3);
+      }, 400);
+      
+      setTimeout(() => {
+        const osc3 = audioContext.createOscillator();
+        osc3.connect(gainNode);
+        osc3.frequency.value = 880;
+        osc3.type = 'sine';
+        osc3.start(audioContext.currentTime);
+        osc3.stop(audioContext.currentTime + 0.3);
+      }, 800);
+    }
   } catch (error) {
-    console.error('Error playing sound:', error);
+    console.log('Could not play sound:', error);
   }
 }
 

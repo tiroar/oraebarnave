@@ -94,7 +94,16 @@ export function MedicalReportsScreen() {
   };
 
   // Combine built-in and uploaded reports
-  const allReports = [
+  type CombinedReport = {
+    title: string;
+    category: string;
+    date: string;
+    path: string;
+    isBuiltIn: boolean;
+    id?: number;
+  };
+
+  const allReports: CombinedReport[] = [
     ...builtInReports.map(r => ({
       title: r.title,
       category: r.category,
@@ -104,7 +113,7 @@ export function MedicalReportsScreen() {
     })),
     ...uploadedReports.map(r => ({
       title: r.title,
-      category: r.category,
+      category: r.category || 'raportet',
       date: r.date,
       path: r.fileData || '',
       isBuiltIn: false,
@@ -272,12 +281,12 @@ export function MedicalReportsScreen() {
                     📅 {formatDateAlbanian(new Date(report.date))}
                   </div>
                 </div>
-                {!report.isBuiltIn && 'id' in report && report.id && (
+                {!report.isBuiltIn && report.id && (
                   <button
                     className="btn-outline"
                     onClick={(e) => {
                       e.stopPropagation();
-                      if ('id' in report && report.id) {
+                      if (report.id) {
                         deleteReport(report.id);
                       }
                     }}
