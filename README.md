@@ -1,0 +1,234 @@
+# 💊 Ora e Barnave
+
+**Aplikacion falas për të menaxhuar orarin e barnave tuaja**
+
+Një aplikacion i thjeshtë dhe i lehtë për përdorim që ju ndihmon të mbani mend kur të merrni barnat tuaja.
+
+---
+
+## ✨ **KARAKTERISTIKAT**
+
+### 🔔 **Kujtesa Automatike**
+- Njoftimet në kohën e duhur
+- Tinguj dhe vibrim
+- Snooze për 10 minuta
+
+### 💊 **Menaxhimi i Barnave**
+- Shtoni barna manualisht
+- Vendosni orarin
+- Udhëzime dhe paralajmërime
+- Grupim automatik sipas orareve
+
+### 📊 **Gjurmimi i Përparimit**
+- Historia e barnave të marra
+- Statistika ditore/javore
+- Eksportim në CSV
+
+### 🩸 **Veçori Shtesë**
+- Gjurmimi i sheqerit në gjak
+- Ditari i shëndetit
+- Raportet mjekësore (me foto)
+- Takimet me doktorë
+- Kontakte urgjente
+
+### 🎨 **Dizajn Miqësor**
+- Tekst i madh dhe i lexueshëm
+- Ngjyra kontrastuese
+- 3 madhësi të shkrimit
+- Optimizuar për të moshuarit
+
+---
+
+## 🚀 **SI TË FILLONI**
+
+### 1️⃣ **Instaloni**
+```bash
+npm install
+```
+
+### 2️⃣ **Startoni Aplikacionin**
+```bash
+npm run dev
+```
+Hap: `http://localhost:3000`
+
+### 3️⃣ **Shtoni Barnat Tuaja**
+1. Shkoni te **"⚙️ Cilësimet"** (dropdown në fund)
+2. Klikoni **"💊 Barna"**
+3. Klikoni **"➕ Shto Barn të Ri"**
+4. Plotësoni:
+   - Emri i barnit
+   - Doza (p.sh. "100mg (1 tabletë)")
+   - Ora (HH:mm format)
+   - Kur merret (para/pas vaktit)
+   - Udhëzime
+   - Paralajmërime
+5. Klikoni **"✅ Ruaj Barnin"**
+
+### 4️⃣ **Aktivizoni Njoftimet**
+- Kur aplikacioni pyet, klikoni **"Lejo"**
+- Në telefon: Cilësimet → Njoftimet → Ora e Barnave → Aktivizo
+
+### 5️⃣ **Instaloni në Telefon** (Rekomanduar)
+- Në Chrome/Safari: Meny → **"Add to Home Screen"**
+- Ikonë do të shfaqet në ekranin kryesor
+
+---
+
+## 🎯 **SI E PËRDORNI**
+
+### **Çdo Ditë:**
+1. Aplikacioni do t'ju njoftojë kur është koha për barn
+2. Hap njoftimin
+3. Lexo udhëzimet
+4. Merr barnin
+5. Kliko **"✅ E MORA"**
+
+### **Snooze:**
+- Nëse nuk jeni gati → **"⏰ Kujtomë pas 10 minutash"**
+
+### **Shiko Historinë:**
+- Dropdown → **"📊 Historia"**
+- Shih të gjitha barnat e marra
+
+### **Eksporto Të Dhënat:**
+- Cilësimet → **"💾 Backup"**
+- Klik **"📥 Shkarko Backup"**
+- Ruaje skedarin në vend të sigurt
+
+---
+
+## 📱 **DEPLOY (VENDOSJE ONLINE)**
+
+### **Opsioni 1: Vercel (FALAS)**
+1. Push në GitHub
+2. Shko te https://vercel.com
+3. Importo repository
+4. Deploy (2 minuta)
+5. Merr linkun: `https://ora-e-barnave.vercel.app`
+
+### **Opsioni 2: Netlify (FALAS)**
+1. Push në GitHub
+2. Shko te https://netlify.com
+3. Importo repository
+4. Deploy
+5. Merr linkun
+
+### **Opsioni 3: Build Lokal**
+```bash
+npm run build
+```
+Folder `dist/` është gati për upload në çdo hosting.
+
+---
+
+## 🛠️ **PERSONALIZIMI**
+
+### **Ndrysho Ngjyrat:**
+`src/styles/global.css` → Ndrysho `:root` variables
+
+### **Ndrysho Madhësinë e Tekstit:**
+Cilësimet → Pamja → Zgjidh madhësinë
+
+### **Shto Emoji të Reja:**
+Kur shton barn, zgjedh çdo emoji që do!
+
+---
+
+## 📋 **STRUKTURA E PROJEKTIT**
+
+```
+ORA E BARNAVE/
+├── src/
+│   ├── components/        # Të gjithë ekranet
+│   ├── data/
+│   │   └── medications.ts # BOSH - shtoni tuajat
+│   ├── db/                # Database lokal (IndexedDB)
+│   ├── utils/             # Helpers dhe njoftimet
+│   └── styles/            # CSS
+├── public/
+│   ├── manifest.json      # PWA config
+│   └── icons/             # Ikonat e aplikacionit
+└── package.json
+```
+
+---
+
+## 🔐 **PRIVATËSIA**
+
+- ✅ Të gjitha të dhënat ruhen **vetëm në pajisjen tuaj**
+- ✅ NUK ka servera të jashtëm
+- ✅ Funksionon **offline** (pas instalimit)
+- ✅ Asnjë tracking
+- ✅ Kodia e hapur
+
+---
+
+## 💡 **KËSHILLA**
+
+1. **Bëni Backup Rregullisht**
+   - Eksportoni të dhënat çdo muaj
+   - Ruajini në vende të ndryshme
+
+2. **Testoni Njoftimet**
+   - Shtoni një barn për 5 minuta më vonë
+   - Kontrolloni nëse vjen njoftimi
+
+3. **Mbani Telefonin të Ngarkuar**
+   - Njoftimet nuk vijnë nëse telefoni është OFF
+
+4. **Përditësoni Rregullisht**
+   - Kontrolloni për përditësime në aplikacion
+   - Refresh faqen për version të ri
+
+5. **Kontakte Urgjente**
+   - Cilësimet → Shtoni numrat e familjarëve
+   - Në rast urgjence, butoni 112 është gjithmonë i disponueshëm
+
+---
+
+## ⚠️ **DISCLAIMER**
+
+**Ky aplikacion është vetëm për kujtesë dhe organizim.**
+
+- ❌ NUK zëvendëson këshillën mjekësore
+- ❌ NUK jep këshilla mjekësore
+- ❌ NUK diagnostikon sëmundje
+
+**Gjithmonë konsultohuni me mjekun tuaj për çdo pyetje mjekësore.**
+
+Në rast urgjence mjekësore, telefononi **112**.
+
+---
+
+## 📞 **MBËSHTETJE**
+
+### **Probleme?**
+1. Refresh aplikacionin (F5)
+2. Pastro cache-in e browser
+3. Ristarto aplikacionin
+4. Rishiko që njoftimet janë të aktivizuara
+
+### **Feedback?**
+Nëse keni sugjerime ose problem, na kontaktoni.
+
+---
+
+## 📄 **LICENSA**
+
+MIT License - E lirë për përdorim personal dhe komercial.
+
+---
+
+## 🙏 **FALEMINDERIT**
+
+Faleminderit që përdorni **Ora e Barnave**. 
+
+Shpresojmë që ky aplikacion t'ju ndihmojë të mbani mend barnat tuaja dhe të jeni më të shëndetshëm! 💚
+
+---
+
+**Krijuar me ❤️ për njerëzit që kanë nevojë për kujtesë**
+
+*Versioni 1.0.0 - Tetor 2025*
+

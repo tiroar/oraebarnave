@@ -1,0 +1,402 @@
+/* ELDERLY-FRIENDLY STYLES - Large text, high contrast, simple layout */
+
+:root {
+  --color-primary: #4CAF50;
+  --color-danger: #FF5252;
+  --color-warning: #FF9800;
+  --color-info: #2196F3;
+  --color-success: #4CAF50;
+  --color-text: #212121;
+  --color-bg: #FAFAFA;
+  --color-card: #FFFFFF;
+  --shadow: 0 4px 12px rgba(0,0,0,0.15);
+  --shadow-lg: 0 8px 24px rgba(0,0,0,0.2);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 20px;
+  line-height: 1.6;
+  color: var(--color-text);
+  background: var(--color-bg);
+  overflow-x: hidden;
+}
+
+/* Font size classes */
+body.font-normal {
+  font-size: 16px;
+}
+
+body.font-normal h1 { font-size: 1.75rem; }
+body.font-normal h2 { font-size: 1.5rem; }
+body.font-normal h3 { font-size: 1.25rem; }
+body.font-normal p { font-size: 1rem; }
+body.font-normal button { font-size: 1.1rem; padding: 1rem 1.5rem; min-height: 60px; }
+body.font-normal .med-name { font-size: 1.5rem; }
+body.font-normal .med-dose { font-size: 1rem; }
+body.font-normal .med-icon { font-size: 2rem; }
+
+body.font-large {
+  font-size: 18px;
+}
+
+body.font-large h1 { font-size: 2rem; }
+body.font-large h2 { font-size: 1.75rem; }
+body.font-large h3 { font-size: 1.35rem; }
+body.font-large p { font-size: 1.1rem; }
+body.font-large button { font-size: 1.25rem; padding: 1.25rem 1.75rem; min-height: 70px; }
+body.font-large .med-name { font-size: 1.75rem; }
+body.font-large .med-dose { font-size: 1.15rem; }
+body.font-large .med-icon { font-size: 2.25rem; }
+
+body.font-extra-large {
+  font-size: 20px;
+}
+
+body.font-extra-large h1 { font-size: 2.5rem; }
+body.font-extra-large h2 { font-size: 2rem; }
+body.font-extra-large h3 { font-size: 1.5rem; }
+body.font-extra-large p { font-size: 1.25rem; }
+body.font-extra-large button { font-size: 1.5rem; padding: 1.5rem 2rem; min-height: 80px; }
+body.font-extra-large .med-name { font-size: 2rem; }
+body.font-extra-large .med-dose { font-size: 1.25rem; }
+body.font-extra-large .med-icon { font-size: 2.5rem; }
+
+/* EXTRA LARGE TEXT for elderly */
+h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: 0.75rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+p {
+  font-size: 1.25rem;
+  line-height: 1.6;
+}
+
+/* LARGE BUTTONS - Easy to tap */
+button {
+  font-size: 1.5rem;
+  font-weight: 600;
+  padding: 1.5rem 2rem;
+  border: none;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: var(--shadow);
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  text-align: center;
+  width: 100%;
+}
+
+button:active {
+  transform: scale(0.98);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+/* Button variants */
+.btn-primary {
+  background: var(--color-primary);
+  color: white;
+}
+
+.btn-primary:active {
+  background: #45A049;
+}
+
+.btn-danger {
+  background: var(--color-danger);
+  color: white;
+}
+
+.btn-warning {
+  background: var(--color-warning);
+  color: white;
+}
+
+.btn-info {
+  background: var(--color-info);
+  color: white;
+}
+
+.btn-outline {
+  background: white;
+  color: var(--color-text);
+  border: 3px solid var(--color-text);
+}
+
+/* Cards */
+.card {
+  background: var(--color-card);
+  border-radius: 20px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+  margin-bottom: 1.5rem;
+}
+
+.card-urgent {
+  border: 4px solid var(--color-danger);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { border-color: var(--color-danger); }
+  50% { border-color: #FF8A80; }
+}
+
+/* Layout */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+.header {
+  background: var(--color-primary);
+  color: white;
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.time-display {
+  font-size: 3rem;
+  font-weight: 700;
+  text-align: center;
+  margin: 1rem 0;
+  color: var(--color-primary);
+}
+
+/* Medication card specific */
+.med-card {
+  border-left: 8px solid;
+  position: relative;
+  overflow: hidden;
+  word-wrap: break-word;
+}
+
+.med-icon {
+  font-size: 3rem;
+  margin-right: 1rem;
+  flex-shrink: 0;
+}
+
+.med-name {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.med-dose {
+  font-size: 1.25rem;
+  color: #666;
+  margin-bottom: 0.5rem;
+  word-wrap: break-word;
+}
+
+.med-instructions {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  background: #FFF9C4;
+  padding: 1rem;
+  border-radius: 12px;
+  margin: 1rem 0;
+  overflow-wrap: break-word;
+}
+
+.med-warning {
+  font-size: 1.1rem;
+  background: #FFEBEE;
+  color: #C62828;
+  padding: 1rem;
+  border-radius: 12px;
+  margin: 1rem 0;
+  font-weight: 600;
+  border-left: 4px solid #C62828;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Timer display for special medications */
+.timer-display {
+  font-size: 3rem;
+  font-weight: 700;
+  text-align: center;
+  padding: 2rem;
+  background: linear-gradient(135deg, #FF6B6B 0%, #FFE66D 100%);
+  border-radius: 20px;
+  margin: 1rem 0;
+  color: white;
+  box-shadow: var(--shadow-lg);
+}
+
+/* Status indicators */
+.status-taken {
+  background: #C8E6C9 !important;
+  border-color: #4CAF50 !important;
+}
+
+.status-missed {
+  background: #FFCDD2 !important;
+  border-color: #F44336 !important;
+}
+
+/* Loading and empty states */
+.loading {
+  text-align: center;
+  padding: 3rem;
+  font-size: 1.5rem;
+  color: #666;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 3rem;
+  font-size: 1.5rem;
+}
+
+/* Bottom navigation */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  background: white;
+  box-shadow: 0 -4px 12px rgba(0,0,0,0.1);
+  padding: 1rem;
+  z-index: 100;
+}
+
+.bottom-nav select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%234CAF50' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1.5rem;
+  padding-right: 3rem;
+}
+
+.bottom-nav select option {
+  padding: 1rem;
+  font-size: 1.1rem;
+}
+
+/* Emergency button */
+.emergency-button {
+  background: #D32F2F;
+  color: white;
+  font-size: 1.75rem;
+  font-weight: 700;
+  padding: 2rem;
+  box-shadow: var(--shadow-lg);
+  animation: pulse-emergency 2s infinite;
+}
+
+@keyframes pulse-emergency {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(211, 47, 47, 0.7); }
+  50% { box-shadow: 0 0 0 20px rgba(211, 47, 47, 0); }
+}
+
+/* History/Stats */
+.stat-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  margin: 1rem 0;
+}
+
+.stat-number {
+  font-size: 4rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.stat-label {
+  font-size: 1.5rem;
+  color: #666;
+}
+
+/* Compliance indicator */
+.compliance-bar {
+  height: 40px;
+  background: #E0E0E0;
+  border-radius: 20px;
+  overflow: hidden;
+  margin: 1rem 0;
+}
+
+.compliance-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #4CAF50 0%, #8BC34A 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: white;
+  transition: width 0.5s ease;
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  :root {
+    --color-text: #000000;
+    --color-bg: #FFFFFF;
+  }
+  
+  button {
+    border: 3px solid currentColor;
+  }
+}
+
+/* Landscape mode adjustments */
+@media (orientation: landscape) and (max-height: 500px) {
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.5rem; }
+  button { min-height: 60px; padding: 1rem 1.5rem; }
+}
+
