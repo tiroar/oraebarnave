@@ -39,19 +39,6 @@ Një aplikacion i thjeshtë dhe i lehtë për përdorim që ju ndihmon të mbani
 
 ---
 
-## 🚀 **SI TË FILLONI**
-
-### 1️⃣ **Instaloni**
-```bash
-npm install
-```
-
-### 2️⃣ **Startoni Aplikacionin**
-```bash
-npm run dev
-```
-Hap: `http://localhost:3000`
-
 ### 3️⃣ **Shtoni Barnat Tuaja**
 1. Shkoni te **"⚙️ Cilësimet"** (dropdown në fund)
 2. Klikoni **"💊 Barna"**
@@ -98,62 +85,6 @@ Hap: `http://localhost:3000`
 
 ---
 
-## 📱 **DEPLOY (VENDOSJE ONLINE)**
-
-### **Opsioni 1: Vercel (FALAS)**
-1. Push në GitHub
-2. Shko te https://vercel.com
-3. Importo repository
-4. Deploy (2 minuta)
-5. Merr linkun: `https://ora-e-barnave.vercel.app`
-
-### **Opsioni 2: Netlify (FALAS)**
-1. Push në GitHub
-2. Shko te https://netlify.com
-3. Importo repository
-4. Deploy
-5. Merr linkun
-
-### **Opsioni 3: Build Lokal**
-```bash
-npm run build
-```
-Folder `dist/` është gati për upload në çdo hosting.
-
----
-
-## 🛠️ **PERSONALIZIMI**
-
-### **Ndrysho Ngjyrat:**
-`src/styles/global.css` → Ndrysho `:root` variables
-
-### **Ndrysho Madhësinë e Tekstit:**
-Cilësimet → Pamja → Zgjidh madhësinë
-
-### **Shto Emoji të Reja:**
-Kur shton barn, zgjedh çdo emoji që do!
-
----
-
-## 📋 **STRUKTURA E PROJEKTIT**
-
-```
-ORA E BARNAVE/
-├── src/
-│   ├── components/        # Të gjithë ekranet
-│   ├── data/
-│   │   └── medications.ts # BOSH - shtoni tuajat
-│   ├── db/                # Database lokal (IndexedDB)
-│   ├── utils/             # Helpers dhe njoftimet
-│   └── styles/            # CSS
-├── public/
-│   ├── manifest.json      # PWA config
-│   └── icons/             # Ikonat e aplikacionit
-└── package.json
-```
-
----
-
 ## 🔐 **PRIVATËSIA**
 
 - ✅ Të gjitha të dhënat ruhen **vetëm në pajisjen tuaj**
@@ -174,7 +105,7 @@ ORA E BARNAVE/
    - Shtoni një barn për 5 minuta më vonë
    - Kontrolloni nëse vjen njoftimi
 
-3. **Mbani Telefonin të Ngarkuar**
+3. **
    - Njoftimet nuk vijnë nëse telefoni është OFF
 
 4. **Përditësoni Rregullisht**
@@ -187,7 +118,7 @@ ORA E BARNAVE/
 
 ---
 
-## ⚠️ **DISCLAIMER**
+## ⚠️ **Mohim përgjegjësie**
 
 **Ky aplikacion është vetëm për kujtesë dhe organizim.**
 
@@ -197,7 +128,7 @@ ORA E BARNAVE/
 
 **Gjithmonë konsultohuni me mjekun tuaj për çdo pyetje mjekësore.**
 
-Në rast urgjence mjekësore, telefononi **112**.
+Në rast urgjence mjekësore, telefononi **194**.
 
 ---
 
