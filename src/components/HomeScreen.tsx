@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Medication } from '../data/medications';
 import { MedicationCard } from './MedicationCard';
 import { MedicationGroupCard } from './MedicationGroupCard';
+import { NotificationWarning } from './NotificationWarning';
 import { getTodayLogs } from '../db/database';
 import { formatDateAlbanian, formatTimeAlbanian } from '../utils/dateHelpers';
 import { shouldShowMedicationToday, getAllActiveMedications } from '../utils/medicationHelpers';
@@ -196,6 +197,9 @@ export function HomeScreen() {
       </div>
 
       <div className="container" style={{ paddingBottom: '120px' }}>
+        {/* Notification Warning */}
+        <NotificationWarning />
+
         {/* Daily progress */}
         <div className="card" style={{ marginTop: '1.5rem' }}>
           <h2 style={{ marginBottom: '1rem', textAlign: 'center' }}>

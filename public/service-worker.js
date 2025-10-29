@@ -152,6 +152,30 @@ self.addEventListener('periodicsync', (event) => {
 
 async function checkMedicationSchedule() {
   console.log('Checking medication schedule...');
-  // Logic to check if any medications are due
+  
+  try {
+    // Get current time
+    const now = new Date();
+    const currentHour = now.getHours();
+    const currentMinute = now.getMinutes();
+    
+    // Check if any medications are due within the next 30 minutes
+    // This would need to access IndexedDB to get medications
+    // For now, we'll show a notification reminder to open the app
+    
+    const registration = await self.registration;
+    await registration.showNotification('⏰ Ora e Barnave', {
+      body: 'Hap aplikacionin për të kontrolluar orarin e barnave',
+      icon: '/icon-192.png',
+      badge: '/icon-192.png',
+      tag: 'medication-reminder',
+      requireInteraction: false,
+      data: {
+        url: '/'
+      }
+    });
+  } catch (error) {
+    console.error('Error checking medication schedule:', error);
+  }
 }
 

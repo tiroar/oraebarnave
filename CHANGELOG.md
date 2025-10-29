@@ -13,9 +13,32 @@ All notable changes and improvements to this project.
   - Fix: Changed query to properly retrieve all active medications
   - **Users who already added medications**: They will now appear after this update!
 
+### 🔔 **Notification Improvements & Clarifications**
+- **Added Periodic Background Sync support** for Chrome Android
+  - Partial solution for background notifications
+  - Checks every 15-30 minutes when app is installed
+  - Limited to Chrome browser on Android
+- **Added prominent Notification Warning banner**
+  - Explains PWA notification limitations clearly
+  - Provides workarounds for Samsung S22 Ultra and other Android devices
+  - Dismissible but shows on first launch
+- **Created comprehensive NOTIFICATION_GUIDE.md**
+  - Complete guide for Samsung S22 Ultra users
+  - Battery optimization settings
+  - Comparison: PWA vs Native app
+  - Explains why notifications don't work when app is closed
+
+### ⚠️ **IMPORTANT: Notification Limitations**
+- PWA notifications **only work while app is open or in background**
+- Notifications **stop when app is fully closed**
+- This is a browser/PWA limitation, not a bug
+- **Solution**: Native Android app coming soon for reliable notifications
+- **Workaround**: Keep app running in background + disable battery optimization
+
 ### 🎨 **UI Improvements**
 - **Version Display:** Added version number to Settings and Privacy screens
 - Users can now see what version they're running
+- **Notification Warning:** Orange banner with clear instructions
 
 ### 🔧 **Data Cleanup**
 - **Removed all remaining personal data** from all screens:

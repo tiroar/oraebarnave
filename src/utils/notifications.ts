@@ -23,6 +23,24 @@ export async function registerNotifications(): Promise<boolean> {
     const registration = await navigator.serviceWorker.register('/service-worker.js');
     console.log('Service Worker registered:', registration);
 
+    // Try to register periodic background sync (Chrome Android only)
+    try {
+      if ('periodicSync' in registration) {
+        const status = await (navigator as any).permissions.query({
+          name: 'periodic-background-sync',
+        });
+        
+        if (status.state === 'granted') {
+          await (registration as any).periodicSync.register('check-medications', {
+            minInterval: 15 * 60 * 1000, // 15 minutes minimum
+          });
+          console.log('Periodic background sync registered');
+        }
+      }
+    } catch (e) {
+      console.log('Periodic background sync not supported:', e);
+    }
+
     return true;
   } catch (error) {
     console.error('Error registering notifications:', error);
