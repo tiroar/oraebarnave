@@ -262,7 +262,10 @@ export async function addCustomMedication(medication: Omit<CustomMedication, 'id
 }
 
 export async function getCustomMedications(): Promise<CustomMedication[]> {
-  return await db.customMedications.where('isActive').equals(1).toArray();
+  // Get all medications and filter for active ones
+  // Note: isActive is boolean, but Dexie indexes need numbers
+  const allMeds = await db.customMedications.toArray();
+  return allMeds.filter(med => med.isActive !== false);
 }
 
 export async function updateCustomMedication(id: number, updates: Partial<CustomMedication>) {

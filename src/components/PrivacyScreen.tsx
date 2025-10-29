@@ -134,7 +134,7 @@ export function PrivacyScreen() {
           borderTop: '2px solid #E0E0E0'
         }}>
           <div style={{ fontSize: '1.5rem', fontWeight: 700, color: '#4CAF50', marginBottom: '0.5rem' }}>
-            Versioni 1.1.0
+            Versioni 1.1.1
           </div>
           <div style={{ fontSize: '0.9rem', color: '#999' }}>
             © 2024 Ora e Barnave - Aplikacion falas dhe i hapur

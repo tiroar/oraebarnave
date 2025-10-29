@@ -6,24 +6,33 @@ All notable changes and improvements to this project.
 
 ## [1.1.1] - 2024-10-29
 
+### 🐛 **CRITICAL BUG FIX**
+- **Fixed medications not appearing after adding them!**
+  - Issue: Custom medications were being saved but not retrieved from database
+  - Cause: Database query was checking wrong type (number vs boolean)
+  - Fix: Changed query to properly retrieve all active medications
+  - **Users who already added medications**: They will now appear after this update!
+
 ### 🎨 **UI Improvements**
-- **Version Display:** Added version number (v1.1.0) to Settings screen and Privacy screen footer
+- **Version Display:** Added version number to Settings and Privacy screens
 - Users can now see what version they're running
 
 ### 🔧 **Data Cleanup**
 - **Removed all remaining personal data** from all screens:
-  - Medication List: Removed hardcoded medication summary
+  - Medication List: Removed hardcoded medication summary, added empty state
   - Emergency Screen: Removed personal medical information
   - Instructions: Replaced specific medication tips with generic advice
 - App is now 100% generic and ready for public use
 
 ### Files Changed:
+- `src/db/database.ts` - **CRITICAL: Fixed getCustomMedications() query**
 - `src/components/SettingsScreen.tsx` - Added version display
 - `src/components/PrivacyScreen.tsx` - Added version display
-- `src/components/MedicationListScreen.tsx` - Removed personal medications, added empty state
-- `src/components/EmergencyScreen.tsx` - Removed personal medical info, loads from user data
-- `src/components/InstructionsScreen.tsx` - Generic tips instead of specific medications
-- `README.md` - Added version update instructions
+- `src/components/MedicationListScreen.tsx` - Loads from database, empty state
+- `src/components/EmergencyScreen.tsx` - Loads medications from database
+- `src/components/InstructionsScreen.tsx` - Generic tips
+- `README.md` - Version update instructions
+- `VERSION_MANAGEMENT.md` - Complete versioning guide
 
 ---
 
