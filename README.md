@@ -230,5 +230,26 @@ Shpresojmë që ky aplikacion t'ju ndihmojë të mbani mend barnat tuaja dhe të
 
 **Krijuar me ❤️ për njerëzit që kanë nevojë për kujtesë**
 
-*Versioni 1.0.0 - Tetor 2025*
+*Versioni 1.1.0 - Tetor 2024*
+
+---
+
+## 🔄 **SI TË PËRDITËSONI VERSIONIN**
+
+Kur bëni ndryshime në aplikacion:
+
+1. **Përditësoni numrin e versionit** në `package.json`:
+   ```json
+   "version": "1.2.0"
+   ```
+
+2. **Përditësoni versionin** në këto skedarë:
+   - `src/components/SettingsScreen.tsx` (rreshti ~689)
+   - `src/components/PrivacyScreen.tsx` (rreshti ~137)
+   - `README.md` (këtu)
+   - `CHANGELOG.md` (shto ndryshimet)
+
+3. **Push në GitHub** - Vercel do të deployojë automatikisht versionin e ri!
+
+Përdoruesit do ta shohin numrin e versionit në **Cilësimet** dhe **Privatësia**.
 

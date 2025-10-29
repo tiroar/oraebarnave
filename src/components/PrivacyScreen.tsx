@@ -125,6 +125,21 @@ export function PrivacyScreen() {
         <p style={{ fontSize: '1rem', color: '#666', textAlign: 'center', marginTop: '2rem' }}>
           Përditësuar më: Tetor 2024
         </p>
+
+        {/* Version Info */}
+        <div style={{
+          marginTop: '2rem',
+          textAlign: 'center',
+          padding: '1.5rem',
+          borderTop: '2px solid #E0E0E0'
+        }}>
+          <div style={{ fontSize: '1.5rem', fontWeight: 700, color: '#4CAF50', marginBottom: '0.5rem' }}>
+            Versioni 1.1.0
+          </div>
+          <div style={{ fontSize: '0.9rem', color: '#999' }}>
+            © 2024 Ora e Barnave - Aplikacion falas dhe i hapur
+          </div>
+        </div>
       </div>
     </div>
   );

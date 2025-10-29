@@ -1,8 +1,28 @@
-import { medications } from '../data/medications';
-import { shouldShowMedicationToday } from '../utils/medicationHelpers';
+import { useState, useEffect } from 'react';
+import { Medication } from '../data/medications';
+import { shouldShowMedicationToday, getAllActiveMedications } from '../utils/medicationHelpers';
 
 export function MedicationListScreen() {
+  const [medications, setMedications] = useState<Medication[]>([]);
   const today = new Date();
+
+  useEffect(() => {
+    loadMedications();
+  }, []);
+
+  useEffect(() => {
+    const handleMedicationsUpdated = () => {
+      loadMedications();
+    };
+    
+    window.addEventListener('medicationsUpdated', handleMedicationsUpdated);
+    return () => window.removeEventListener('medicationsUpdated', handleMedicationsUpdated);
+  }, []);
+
+  const loadMedications = async () => {
+    const meds = await getAllActiveMedications();
+    setMedications(meds);
+  };
   
   // Group medications by meal time
   const mealGroups = {
@@ -179,21 +199,18 @@ export function MedicationListScreen() {
           );
         })}
 
-        {/* Summary */}
-        <div className="card" style={{ marginTop: '2rem', background: '#E8F5E9' }}>
-          <h3 style={{ marginBottom: '1rem' }}>📊 Përmbledhje</h3>
-          <div style={{ fontSize: '1.1rem', lineHeight: 2 }}>
-            <div>🔵 <strong>Madopar:</strong> 3 herë në ditë (para vakteve)</div>
-            <div>🔷 <strong>Maymetis:</strong> 2 herë në ditë (pas mëngjesit dhe darkës)</div>
-            <div>🔴 <strong>Gliclada:</strong> 1 herë në ditë (30 min para mëngjesit)</div>
-            <div>🟣 <strong>Pramipexole:</strong> 1 herë në ditë (me mëngjes)</div>
-            <div>🟢 <strong>Jardiance:</strong> 1 herë në ditë (pas drekës)</div>
-            <div>🟡 <strong>Vitamina D3:</strong> 1 herë në ditë (me mëngjes)</div>
-            <div>🟢 <strong>Etinerv:</strong> 1 herë në ditë (pas mëngjesit)</div>
-            <div>⚪ <strong>Aspirin:</strong> 1 herë në ditë (para gjumit)</div>
-            <div>🟤 <strong>Lyrica:</strong> 1-2 herë në ditë (sipas javës)</div>
+        {/* Empty state when no medications */}
+        {medications.length === 0 && (
+          <div className="card" style={{ marginTop: '2rem', background: '#FFF3E0', textAlign: 'center', padding: '3rem 2rem' }}>
+            <div style={{ fontSize: '5rem', marginBottom: '1rem' }}>💊</div>
+            <h3 style={{ fontSize: '1.75rem', marginBottom: '1rem' }}>
+              Asnjë barn i shtuar ende
+            </h3>
+            <p style={{ fontSize: '1.25rem', lineHeight: 1.6, color: '#666' }}>
+              Për të filluar, shko te <strong>Cilësimet → Barna</strong> dhe shto barnat që merr çdo ditë.
+            </p>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );

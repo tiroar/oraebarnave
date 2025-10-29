@@ -1,15 +1,23 @@
 import { useState, useEffect } from 'react';
 import { db, EmergencyContact } from '../db/database';
-import { medications } from '../data/medications';
+import { Medication } from '../data/medications';
+import { getAllActiveMedications } from '../utils/medicationHelpers';
 
 export function EmergencyScreen() {
   const [contacts, setContacts] = useState<EmergencyContact[]>([]);
+  const [medications, setMedications] = useState<Medication[]>([]);
   const [showAddForm, setShowAddForm] = useState(false);
   const [editingContact, setEditingContact] = useState<EmergencyContact | null>(null);
 
   useEffect(() => {
     loadContacts();
+    loadMedications();
   }, []);
+
+  const loadMedications = async () => {
+    const meds = await getAllActiveMedications();
+    setMedications(meds);
+  };
 
   const loadContacts = async () => {
     const allContacts = await db.emergencyContacts.orderBy('order').toArray();
@@ -63,27 +71,29 @@ export function EmergencyScreen() {
           
           <div style={{ fontSize: '1.25rem', lineHeight: 2 }}>
             <div style={{ marginBottom: '1rem' }}>
-              <strong>👤 Emri:</strong> Sevdije Zeqiri
+              <strong>👤 Emri:</strong> <em style={{ color: '#666' }}>[Shto në cilësimet e aplikacionit]</em>
             </div>
             <div style={{ marginBottom: '1rem' }}>
-              <strong>🎂 Mosha:</strong> 71 vjeç
+              <strong>🎂 Mosha:</strong> <em style={{ color: '#666' }}>[Shto në cilësimet e aplikacionit]</em>
             </div>
             <div style={{ marginBottom: '1rem' }}>
               <strong>🏥 Diagnoza:</strong>
-              <div style={{ paddingLeft: '1.5rem', marginTop: '0.5rem' }}>
-                • Diabeti Tipi 2 (15 vjet)<br />
-                • Parkinson (3 vjet)<br />
-                • Neuropati Diabetike<br />
-                • Osteoporoza<br />
-                • Spondylosis
+              <div style={{ paddingLeft: '1.5rem', marginTop: '0.5rem', color: '#666', fontStyle: 'italic' }}>
+                [Këtu do të shfaqen diagnozat tuaja]
               </div>
             </div>
             <div style={{ marginBottom: '1rem' }}>
               <strong>💊 Barna Aktuale:</strong>
               <div style={{ paddingLeft: '1.5rem', marginTop: '0.5rem', fontSize: '1.1rem' }}>
-                {medications.map(med => (
-                  <div key={med.id}>• {med.name} - {med.dose}</div>
-                ))}
+                {medications.length > 0 ? (
+                  medications.map(med => (
+                    <div key={med.id}>• {med.name} - {med.dose}</div>
+                  ))
+                ) : (
+                  <em style={{ color: '#666', fontStyle: 'italic' }}>
+                    [Asnjë barn i shtuar - Shto në Cilësimet → Barna]
+                  </em>
+                )}
               </div>
             </div>
           </div>

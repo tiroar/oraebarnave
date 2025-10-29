@@ -65,25 +65,28 @@ export function InstructionsScreen() {
           </div>
         </div>
 
-        {/* Quick Reference */}
+        {/* Quick Reference - General Tips */}
         <div className="card" style={{ background: '#E3F2FD', marginTop: '1.5rem' }}>
-          <h2>⚡ Kujtesa të Shpejta</h2>
+          <h2>⚡ Këshilla të Përgjithshme</h2>
           
           <div style={{ fontSize: '1.1rem', lineHeight: 1.8 }}>
             <div style={{ marginBottom: '0.75rem' }}>
-              🔵 <strong>Madopar:</strong> Para vakteve, pa proteinë!
+              💊 <strong>Merri barnat në të njëjtën orë çdo ditë</strong> për rezultate më të mira
             </div>
             <div style={{ marginBottom: '0.75rem' }}>
-              🔴 <strong>Gliclada:</strong> Vetëm nëse ha! Ruaj lëng afër.
+              🥤 <strong>Pi shumë ujë</strong> kur merr barnat (përveç nëse mjeku thotë ndryshe)
             </div>
             <div style={{ marginBottom: '0.75rem' }}>
-              🟢 <strong>Jardiance:</strong> Pi shumë ujë gjatë ditës!
+              🍽️ <strong>Disa barna merren me ushqim,</strong> të tjerët pa ushqim - ndjek udhëzimet
             </div>
             <div style={{ marginBottom: '0.75rem' }}>
-              🟣 <strong>Pramipexol/Lyrica:</strong> Mund të bëjnë përgjumje.
+              ⏰ <strong>Mos i harro barnat</strong> - përdor aplikacionin për kujtesa
             </div>
             <div style={{ marginBottom: '0.75rem' }}>
-              🔺 <strong>Ibandrosaure:</strong> Vetëm 1 herë në muaj! Qëndro në këmbë 60 min!
+              📞 <strong>Telefono mjekun</strong> nëse ke efekte anësore ose pyetje
+            </div>
+            <div style={{ marginBottom: '0.75rem' }}>
+              🔄 <strong>Mos i ndalo barnat pa konsultuar mjekun,</strong> edhe nëse ndihesh mirë
             </div>
           </div>
         </div>

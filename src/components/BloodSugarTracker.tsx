@@ -294,7 +294,7 @@ export function BloodSugarTracker() {
 
               const csv = [
                 'RAPORTI I SHEQERIT NË GJAK - 3 MUAJT E FUNDIT',
-                `Pacienti: Sevdije Zeqiri`,
+                `Data e eksportimit: ${new Date().toLocaleDateString('sq-AL')}`,
                 `Periudha: ${startDate} deri ${new Date().toISOString().split('T')[0]}`,
                 `Numri i matjeve: ${sortedLogs.length}`,
                 `Mesatarja: ${avg} mmol/L`,

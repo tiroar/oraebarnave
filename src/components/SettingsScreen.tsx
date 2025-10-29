@@ -674,6 +674,24 @@ function BackupTab() {
           • Mund ta dërgoni backup-in te familjarët
         </p>
       </div>
+
+      {/* Version Info */}
+      <div style={{
+        marginTop: '3rem',
+        textAlign: 'center',
+        padding: '1.5rem',
+        borderTop: '2px solid #E0E0E0'
+      }}>
+        <div style={{ fontSize: '1rem', color: '#666', marginBottom: '0.5rem' }}>
+          💊 Ora e Barnave
+        </div>
+        <div style={{ fontSize: '1.5rem', fontWeight: 700, color: '#4CAF50', marginBottom: '0.5rem' }}>
+          Versioni 1.1.0
+        </div>
+        <div style={{ fontSize: '0.9rem', color: '#999' }}>
+          © 2024 - Aplikacion falas dhe i hapur
+        </div>
+      </div>
     </div>
   );
 }

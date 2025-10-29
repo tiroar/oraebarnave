@@ -355,7 +355,7 @@ export function HomeScreen() {
           }}>
             <div style={{ fontSize: '5rem', marginBottom: '1rem' }}>🎉</div>
             <h2 style={{ fontSize: '2.5rem', color: 'white' }}>
-              Urime Mami!
+              Urime!
             </h2>
             <p style={{ fontSize: '1.75rem', marginTop: '1rem', color: 'white' }}>
               I more të gjitha medikamentet e sotme!
